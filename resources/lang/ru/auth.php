@@ -12,10 +12,10 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'login' => 'Login',
-    'password' => 'Password',
-    'remember' => 'Remember Me',
-    'forgot' => 'Forgot Your Password',
+    'login' => 'Вход',
+    'password' => 'Пароль',
+    'remember' => 'Запомнить меня',
+    'forgot' => 'Забыл пароль',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

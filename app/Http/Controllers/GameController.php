@@ -8,10 +8,10 @@ use Validator;
 
 class GameController extends Controller
 {
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $gameExists = false;
