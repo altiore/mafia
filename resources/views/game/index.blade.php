@@ -7,6 +7,7 @@
                 <div class="col-sm-12 alert alert-success">
                     {{$test}}
                 </div>
+                <a href="{{url('gamer/create')}}" class="btn btn-lg"></a>
                 <a href="{{ url('/delete') }}" class="btn btn-lg">Удалить игру</a>
             @else
                 <form role="form" method="POST" action="{{ url('/create') }}">

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Gamer;
 use Illuminate\Http\Request;
 use App\Game;
 use App\Http\Requests;
@@ -12,19 +13,24 @@ class GameController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index(Request $request)
     {
         $gameExists = false;
+        /** @var Game $game */
+        $game = Game::where('id', '=', $request->session()->get('game'))->first();
         if ($request->session()->has('game')) {
-            $test = 'Игра есть и имя ее ' . $request->session()->get('game');
+            $test = 'Игра есть и имя ее ' . $game->name;
             $gameExists = true;
         }
 
         return view('game.index', [
             'test' => $test ?? 'Игры нет',
             'gameExists' => $gameExists,
+            //'gamers' => Gamer::where('game_id', $request->get('id')),
         ]);
     }
+
     public function create(Request $request)
     {
         $this->validate($request, [
@@ -32,12 +38,13 @@ class GameController extends Controller
         ]);
 
         $name = $request->get('name');
-        Game::create([
+        $game = Game::create([
             'name' => $name,
         ]);
-        session(['game' => $name]);
+        session(['game' => $game->id]);
         return redirect('/');
     }
+
     public function destroy(Request $request)
     {
         $request->session()->forget('game');
