@@ -17,8 +17,7 @@ class CreateTableGamers extends Migration
             $table->integer('game_id');
             $table->integer('user_id')->nullable();
             $table->string('name', 32);
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
             $table->foreign('game_id')
                 ->references('id')->on('games')
                 ->onDelete('cascade')

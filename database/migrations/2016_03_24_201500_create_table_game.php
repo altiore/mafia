@@ -16,8 +16,7 @@ class CreateTableGame extends Migration
             $table->increments('id');
             $table->string('name', 128);
             $table->integer('user_id');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onUpdate('cascade')
