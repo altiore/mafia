@@ -15,8 +15,11 @@ class CreateTableGame extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 128);
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+        });
+
+        Schema::table('games', function (Blueprint $table) {
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onUpdate('cascade')
