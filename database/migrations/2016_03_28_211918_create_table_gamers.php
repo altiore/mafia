@@ -14,10 +14,13 @@ class CreateTableGamers extends Migration
     {
         Schema::create('gamers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('game_id');
-            $table->integer('user_id')->nullable();
+            $table->integer('game_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->string('name', 32);
             $table->timestamps();
+        });
+
+        Schema::table('gamers', function (Blueprint $table) {
             $table->foreign('game_id')
                 ->references('id')->on('games')
                 ->onDelete('cascade')
