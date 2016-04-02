@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Gamer
@@ -27,13 +28,13 @@ use Illuminate\Http\Request;
 class Gamer extends Model
 {
     protected $fillable = [
-        'gmr_name',
+        'name',
+        'game_id',
     ];
 
-    public function __construct(array $attributes, Request $request) {
-        $this->game_id = $request->session()->get('game');
-        parent::__construct($attributes);
-    }
+    protected $hidden = [
+        'user_id',
+    ];
 
     public function game()
     {

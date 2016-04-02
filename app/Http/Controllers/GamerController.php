@@ -17,8 +17,9 @@ class GamerController extends Controller
 {
     protected $redirect = 'game.index';
 
-    public function __construct(Request $request) {
-        $this->request = $request;
+    public function validate(Request $request, array $rules, array $messages = [], array $customAttributes = [])
+    {
+
     }
 
     /**
@@ -28,15 +29,7 @@ class GamerController extends Controller
      */
     public function create()
     {
-        $this->validate($this->request, [
-            'name' => 'required|max:32',
-        ]);
 
-        Gamer::create([
-            'name' => $this->request->get('name'),
-        ]);
-
-        return redirect($this->redirect);
     }
 
     /**
@@ -47,7 +40,16 @@ class GamerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:32',
+        ]);
+
+        Gamer::create([
+            'name'    => $request->get('name'),
+            'game_id' => $request->session()->get('game'),
+        ]);
+
+        return redirect('/');
     }
 
     /**
@@ -92,6 +94,8 @@ class GamerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Gamer::destroy($id);
+
+        return redirect('/');
     }
 }

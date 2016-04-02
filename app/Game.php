@@ -24,11 +24,12 @@ class Game extends Model
 {
     protected $fillable = [
         'name',
+        'user_id',
     ];
 
-    public function __construct(array $attributes = []) {
-        $this->user_id = Auth::user()->id;
-        parent::__construct($attributes);
+    public static function boot()
+    {
+        parent::boot();
     }
 
 }

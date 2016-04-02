@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Gamer;
-use Illuminate\Http\Request;
 use App\Game;
+use App\Gamer;
 use App\Http\Requests;
-use Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
@@ -19,27 +19,26 @@ class GameController extends Controller
         $gameExists = false;
         /** @var Game $game */
         $game = Game::where('id', '=', $request->session()->get('game'))->first();
-        if ($request->session()->has('game')) {
-            $test = 'Игра есть и имя ее ' . $game->name;
+        if ($game !== null && $request->session()->has('game')) {
+            $gameName = 'Игра есть и имя ее ' . $game->name;
             $gameExists = true;
         }
 
+        $gamers = Gamer::where('game_id', $request->session()->get('game'))->get();
+
         return view('game.index', [
-            'test' => $test ?? 'Игры нет',
+            'test' => $gameName ?? 'Игры нет',
             'gameExists' => $gameExists,
-            //'gamers' => Gamer::where('game_id', $request->get('id')),
+            'gamers' => $gamers,
         ]);
     }
 
     public function create(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
         $name = $request->get('name');
         $game = Game::create([
             'name' => $name,
+            'user_id' => Auth::user()->id,
         ]);
         session(['game' => $game->id]);
         return redirect('/');
