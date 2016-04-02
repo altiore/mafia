@@ -15,7 +15,9 @@ class AddColomnCreaterToTableGamers extends Migration
         if (!Schema::hasColumn('gamers', 'creator_id')) {
             Schema::table('gamers', function (Blueprint $table) {
                 $table->addColumn('integer', 'creator_id');
+            });
 
+            Schema::table('gamers', function (Blueprint $table) {
                 $table->foreign('creator_id')
                     ->references('id')->on('users')
                     ->onDelete('no action')

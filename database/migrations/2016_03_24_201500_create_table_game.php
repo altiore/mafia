@@ -17,6 +17,9 @@ class CreateTableGame extends Migration
             $table->string('name', 128);
             $table->integer('user_id');
             $table->timestamps();
+        });
+
+        Schema::table('games', function (Blueprint $table) {
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onUpdate('cascade')
