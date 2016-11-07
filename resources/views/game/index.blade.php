@@ -11,7 +11,7 @@
                 @if (count($gamers) > 0)
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Current Tasks
+                            Игроки
                         </div>
 
                         <div class="panel-body">
@@ -27,27 +27,33 @@
                                 <tbody>
                                 @foreach ($gamers as $gamer)
                                     <tr>
-                                        <td class="table-text">
+                                        <td class="table-text col-sm-9 c">
                                             <div><span>{{ $gamer->id }}</span> {{ $gamer->name }}</div>
                                         </td>
 
-                                        <td>
-                                            <form action="{{ url('gamer/'.$gamer->id) }}" method="POST">
-                                                {!! csrf_field() !!}
-
-                                                <button type="submit" id="delete-task-{{ $gamer->id }}" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Delete
-                                                </button>
-                                            </form>
+                                        <td class="col-sm-1">
+                                            <button type="submit" data-id="{{$gamer->id}}" class="btn btn-warning edit-button" data-toggle="modal" data-target="#myModal">
+                                                <i class="fa fa-btn fa-gear"></i>&nbsp;&nbsp;Изменить
+                                            </button>
                                         </td>
 
-                                        <td>
+                                        <td class="col-sm-1">
                                             <form action="{{ url('gamer/'.$gamer->id) }}" method="POST">
                                                 {!! csrf_field() !!}
                                                 {!! method_field('DELETE') !!}
 
                                                 <button type="submit" id="delete-task-{{ $gamer->id }}" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Delete
+                                                    <i class="fa fa-btn fa-trash"></i>&nbsp;&nbsp;Удалить
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                        <td class="col-sm-1">
+                                            <form action="{{ url('gamer/'.$gamer->id) }}" method="POST">
+                                                {!! csrf_field() !!}
+
+                                                <button type="submit" id="delete-task-{{ $gamer->id }}" class="btn btn-danger">
+                                                    <i class="fa fa-btn fa-trash"></i>&nbsp;&nbsp;Delete
                                                 </button>
                                             </form>
                                         </td>

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Gamer;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Models\Gamer;
+use Request;
 
 /**
  * Class GamerController
@@ -35,8 +33,8 @@ class GamerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -45,8 +43,9 @@ class GamerController extends Controller
         ]);
 
         Gamer::create([
-            'name'    => $request->get('name'),
-            'game_id' => $request->session()->get('game'),
+            'name'      => $request->get('name'),
+            'game_id'   => $request->session()->get('game'),
+            'creator_id' => $request->user()->getKey(),
         ]);
 
         return redirect('/');
@@ -71,7 +70,11 @@ class GamerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $gamer = Gamer::find($id);
+
+        return view('gamer.edit', [
+            'gamer' => $gamer,
+        ]);
     }
 
     /**
@@ -83,7 +86,8 @@ class GamerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        dd($request, $id);
     }
 
     /**

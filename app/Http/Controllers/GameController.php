@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Game;
-use App\Gamer;
-use App\Http\Requests;
+use App\Models\Game;
+use App\Models\Gamer;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Request;
 
 class GameController extends Controller
 {

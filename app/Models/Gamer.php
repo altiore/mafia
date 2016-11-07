@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Auth;
  * @property string $name
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \App\Game $game
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Query\Builder|\App\Gamer whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Gamer whereGameId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Gamer whereUserId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Gamer whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Gamer whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Gamer whereUpdatedAt($value)
+ * @property-read \App\Models\Game $game
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Gamer whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Gamer whereGameId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Gamer whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Gamer whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Gamer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Gamer whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Gamer extends Model
@@ -30,6 +30,7 @@ class Gamer extends Model
     protected $fillable = [
         'name',
         'game_id',
+        'creator_id',
     ];
 
     protected $hidden = [

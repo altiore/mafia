@@ -22,7 +22,6 @@ class AddColomnCreaterToTableGamers extends Migration
                     ->references('id')->on('users')
                     ->onDelete('no action')
                     ->onUpdate('cascade');
-
             });
         }
     }
